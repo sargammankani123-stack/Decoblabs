@@ -1,0 +1,621 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nova Space | Modern Furniture Portfolio</title>
+    <!-- Google Fonts + smooth behavior -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefaf5;
+            color: #1e1e2a;
+            scroll-behavior: smooth;
+            line-height: 1.4;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e9e1d8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #b87c4f;
+            border-radius: 12px;
+        }
+
+        /* container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* header / nav */
+        header {
+            padding: 24px 0 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background-color: #fefaf5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+            background-color: rgba(254, 250, 245, 0.92);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #2c2a2a, #b87c4f);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .logo span {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #7a6a5c;
+            display: block;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+            .nav-links a {
+                text-decoration: none;
+                font-weight: 500;
+                color: #2e2a28;
+                transition: 0.2s;
+            }
+
+                .nav-links a:hover {
+                    color: #b87c4f;
+                }
+
+        /* Hero section */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 60px 0 70px;
+        }
+
+        .hero-content {
+            flex: 1.2;
+        }
+
+            .hero-content .badge {
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #b87c4f;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+
+            .hero-content h2 {
+                font-size: 3.3rem;
+                font-weight: 700;
+                line-height: 1.2;
+                margin-bottom: 1.2rem;
+                color: #1f1c1a;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                color: #4f4a45;
+                max-width: 500px;
+                margin-bottom: 2rem;
+                line-height: 1.5;
+            }
+
+        .btn {
+            background: #1e1e2a;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #b87c4f;
+            box-shadow: 0 8px 20px rgba(184, 124, 79, 0.2);
+        }
+
+            .btn-primary:hover {
+                background: #9e643d;
+                transform: translateY(-3px);
+            }
+
+        .hero-image {
+            flex: 1;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.2);
+        }
+
+            .hero-image img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            .hero-image:hover img {
+                transform: scale(1.02);
+            }
+
+        /* section titles */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin: 3rem 0 1.2rem 0;
+            letter-spacing: -0.3px;
+            position: relative;
+            display: inline-block;
+        }
+
+            .section-title:after {
+                content: '';
+                position: absolute;
+                bottom: -12px;
+                left: 0;
+                width: 60px;
+                height: 3px;
+                background: #b87c4f;
+                border-radius: 4px;
+            }
+
+        /* Gallery grid — modern portfolio layout */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0 60px;
+        }
+
+        .furniture-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+        }
+
+            .furniture-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
+            }
+
+        .card-img {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background: #f0eae3;
+        }
+
+            .card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s;
+            }
+
+        .furniture-card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 20px 20px 24px;
+        }
+
+            .card-info h3 {
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+
+            .card-info .price {
+                color: #b87c4f;
+                font-weight: 700;
+                font-size: 1.2rem;
+                margin: 8px 0;
+            }
+
+            .card-info p {
+                color: #5a5652;
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+        /* Features / about section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: #ffffffd9;
+            border-radius: 48px;
+            padding: 50px 40px;
+            margin: 60px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.02);
+            border: 1px solid #f2e7de;
+        }
+
+        .feature-item {
+            flex: 1;
+            text-align: center;
+            min-width: 180px;
+        }
+
+            .feature-item i {
+                font-size: 2.6rem;
+                color: #b87c4f;
+                margin-bottom: 18px;
+            }
+
+            .feature-item h4 {
+                font-size: 1.3rem;
+                margin-bottom: 8px;
+            }
+
+            .feature-item p {
+                color: #6b625b;
+                font-size: 0.9rem;
+            }
+
+        /* testimonial / studio quote */
+        .studio-note {
+            background: #2c2824;
+            color: #f3ede8;
+            border-radius: 40px;
+            padding: 50px 40px;
+            margin: 40px 0 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+            .studio-note blockquote {
+                font-size: 1.7rem;
+                font-weight: 500;
+                line-height: 1.3;
+                max-width: 600px;
+                font-style: normal;
+            }
+
+            .studio-note span {
+                font-size: 1rem;
+                display: block;
+                margin-top: 16px;
+                color: #cfb79c;
+            }
+
+            .studio-note .signature {
+                font-family: monospace;
+                letter-spacing: 1px;
+            }
+
+        /* footer */
+        footer {
+            background: #f3ede7;
+            padding: 48px 0 32px;
+            margin-top: 40px;
+            border-radius: 32px 32px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #1e1e2a;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 36px;
+        }
+
+            .footer-links a {
+                text-decoration: none;
+                color: #4b3f38;
+                font-weight: 500;
+            }
+
+        .social-icons i {
+            font-size: 1.5rem;
+            margin-left: 18px;
+            color: #6c5b4e;
+            transition: 0.2s;
+        }
+
+            .social-icons i:hover {
+                color: #b87c4f;
+            }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #877b72;
+            border-top: 1px solid #ddd0c4;
+            padding-top: 24px;
+        }
+
+        @media (max-width: 780px) {
+            .hero-content h2 {
+                font-size: 2.3rem;
+            }
+
+            .nav-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+            }
+
+            .features {
+                padding: 30px 20px;
+            }
+
+            .studio-note blockquote {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h1>NOVA&nbsp;SPACE</h1>
+                    <span>modern living · curated objects</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#collection">Collection</a>
+                    <a href="#studio">Studio</a>
+                    <a href="#">Journal</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Hero Section with beautiful interior image -->
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="badge">✦ since 2025</div>
+                    <h2>Sculptural furniture <br>for modern souls</h2>
+                    <p>Minimalist forms, timeless materials, and warm details — each piece tells a story of craftsmanship and contemporary elegance.</p>
+                    <a href="#collection" class="btn btn-primary">Explore collection <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                         alt="Modern living room with elegant furniture">
+                </div>
+            </div>
+
+            <!-- portfolio Gallery - furniture collection with beautiful images -->
+            <div id="collection">
+                <h2 class="section-title">Curated collection</h2>
+                <div class="gallery">
+                    <!-- card 1 -->
+                    <div class="furniture-card">
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Eames style lounge chair">
+                        </div>
+                        <div class="card-info">
+                            <h3>Milo Lounge Chair</h3>
+                            <div class="price">$1,890</div>
+                            <p>Walnut shell, leather upholstery. Iconic silhouette meets plush comfort.</p>
+                        </div>
+                    </div>
+                    <!-- card 2 -->
+                    <div class="furniture-card">
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/4070372/pexels-photo-4070372.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Scandinavian wooden table">
+                        </div>
+                        <div class="card-info">
+                            <h3>Oslo Oak Table</h3>
+                            <div class="price">$2,450</div>
+                            <p>Solid oak, organic live edge. Seats 6-8, organic modern centerpiece.</p>
+                        </div>
+                    </div>
+                    <!-- card 3 -->
+                    <div class="furniture-card">
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="light minimalist sofa">
+                        </div>
+                        <div class="card-info">
+                            <h3>Nimbus Modular Sofa</h3>
+                            <div class="price">$3,290</div>
+                            <p>Deep seats, bouclé fabric. Configurable for any space.</p>
+                        </div>
+                    </div>
+                    <!-- card 4 -->
+                    <div class="furniture-card">
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="brass shelf sideboard">
+                        </div>
+                        <div class="card-info">
+                            <h3>Eclipse Sideboard</h3>
+                            <div class="price">$1,570</div>
+                            <p>Walnut & powder-coated steel, soft-close doors.</p>
+                        </div>
+                    </div>
+                    <!-- card 5 -->
+                    <div class="furniture-card">
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/3757055/pexels-photo-3757055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="organic bed frame">
+                        </div>
+                        <div class="card-info">
+                            <h3>Lunar Bed Frame</h3>
+                            <div class="price">$2,990</div>
+                            <p>Textiled headboard, solid ashwood frame. Cloud-like serenity.</p>
+                        </div>
+                    </div>
+                    <!-- card 6 -->
+                    <div class="furniture-card">
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/1199366/pexels-photo-1199366.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="pendant light and minimal desk">
+                        </div>
+                        <div class="card-info">
+                            <h3>Aero Desk</h3>
+                            <div class="price">$1,290</div>
+                            <p>Lightweight steel frame, walnut top. Integrated cable tray.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features / detailing -->
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-palette"></i>
+                    <h4>Artisan finish</h4>
+                    <p>Handcrafted details & natural oils</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Sustainable woods</h4>
+                    <p>FSC-certified timber, low-VOC finish</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-truck-fast"></i>
+                    <h4>White glove delivery</h4>
+                    <p>Free assembly & packaging removal</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-calendar-week"></i>
+                    <h4>5-year warranty</h4>
+                    <p>Built to last generations</p>
+                </div>
+            </div>
+
+            <!-- Studio note (testimonial & modern portfolio vibe) -->
+            <div id="studio">
+                <div class="studio-note">
+                    <blockquote>
+                        “Every piece is a reflection of slow design — where material honesty meets spatial poetry.”
+                        <span>— Elena Voss, Creative Director</span>
+                    </blockquote>
+                    <div class="signature">
+                        <i class="fas fa-chair"></i>  Nova Atelier
+                    </div>
+                </div>
+            </div>
+
+            <!-- additional "behind the design" - showing a beautiful extra image -->
+            <div style="margin: 30px 0 20px; border-radius: 36px; overflow: hidden; box-shadow: 0 18px 32px -12px rgba(0,0,0,0.1);">
+                <img src="https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Modern interior with sculpture and sunlight" style="width:100%; max-height: 480px; object-fit: cover; display: block;">
+            </div>
+            <div style="text-align: center; margin: 1rem 0 3rem;">
+                <p style="font-size: 0.9rem; letter-spacing: 1px; color: #b87c4f;">✦  handpicked interior inspirations  ✦</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>NOVA SPACE</h3>
+                    <p style="font-size: 0.8rem; margin-top: 6px;">modern furniture · milan | nyc</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Shop</a>
+                    <a href="#">About</a>
+                    <a href="#">Sustainability</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="social-icons">
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-behance"></i>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Nova Space — timeless design portfolio. All pieces are original concepts.
+            </div>
+        </div>
+    </footer>
+
+    <!-- subtle interactive effect : slight zoom popup on cards details? just nice modern UX -->
+    <script>
+  // Optional little interaction: console greeting, plus any hover enhancements.
+  // also adds smooth anchor offset due to sticky header.
+  document.querySelectorAll('.nav-links a[href^="#"], .btn-primary[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === "#" || targetId === "") return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        const headerOffset = 90;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+  // little playful message in console to match modern portfolio vibe
+  console.log("✨ Nova Space | modern furniture & design portfolio — beautiful images & craftsmanship");
+    </script>
+</body>
+</html>

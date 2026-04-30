@@ -1,0 +1,1408 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DecodeLabs | Project 3 · Interactive Web Elements</title>
+    <!-- Google Fonts & simple reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f7fc;
+            color: #1A2C3E;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header */
+        .site-header {
+            background: #0A1A2F;
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: #7e9ef5;
+        }
+
+        .badge-header {
+            background: #1f4f8f30;
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Hero intro */
+        .hero {
+            background: linear-gradient(115deg, #e9f0fa 0%, #ffffff 100%);
+            padding: 3rem 0;
+            border-bottom: 1px solid #d4e2fc;
+        }
+
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1.2;
+        }
+
+            .hero-text h2 {
+                font-size: 2.6rem;
+                font-weight: 800;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+                color: #2c4e6e;
+                max-width: 90%;
+                margin-bottom: 1.5rem;
+            }
+
+        .hero-icon {
+            flex: 0.8;
+            background: #ffffffcc;
+            border-radius: 36px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.05);
+        }
+
+            .hero-icon i {
+                font-size: 5rem;
+                color: #1f4f8f;
+            }
+
+        /* interactive playground */
+        .playground {
+            padding: 3.5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #3a5e7a;
+            max-width: 650px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* cards container */
+        .interactive-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem;
+            flex: 1;
+            min-width: 260px;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+            border: 1px solid #eef2ff;
+        }
+
+            .card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+        /* buttons & toggles */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .btn-primary {
+            background: #1f4f8f;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .btn-primary:hover {
+                background: #0e3a6b;
+                transform: translateY(-2px);
+            }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #1f4f8f;
+            color: #1f4f8f;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            .btn-outline:hover {
+                background: #eef4ff;
+            }
+
+        /* toggle switch (custom) */
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 1.2rem 0 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 56px;
+            height: 28px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 34px;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 22px;
+                width: 22px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: 0.3s;
+                border-radius: 50%;
+            }
+
+        input:checked + .slider {
+            background-color: #1f4f8f;
+        }
+
+            input:checked + .slider:before {
+                transform: translateX(28px);
+            }
+
+        .toggle-label {
+            font-weight: 500;
+        }
+
+        /* dynamic content display */
+        .dynamic-box {
+            background: #f0f5fe;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin-top: 1.2rem;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .counter-area {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0a1a2f;
+        }
+
+        .message-area {
+            background: #e4edfa;
+            padding: 0.7rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 18px;
+            background: #6c9eff;
+            margin: 1rem 0;
+        }
+
+        /* to-do list (interactive) */
+        .todo-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+            .todo-list li {
+                background: #f8fafd;
+                margin: 0.6rem 0;
+                padding: 0.6rem 1rem;
+                border-radius: 60px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 1px solid #dce7f5;
+            }
+
+                .todo-list li span {
+                    cursor: pointer;
+                    font-weight: 500;
+                }
+
+                    .todo-list li span.done {
+                        text-decoration: line-through;
+                        color: #7890aa;
+                    }
+
+        .delete-task {
+            background: none;
+            border: none;
+            color: #b91c1c;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .add-todo {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+            .add-todo input {
+                flex: 1;
+                padding: 0.7rem 1rem;
+                border-radius: 60px;
+                border: 1px solid #cbdffc;
+                outline: none;
+                font-family: inherit;
+            }
+
+            .add-todo button {
+                background: #1f4f8f;
+                border: none;
+                padding: 0 1.2rem;
+                border-radius: 60px;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+        /* footer */
+        .main-footer {
+            background: #0A1A2F;
+            color: #cdddf5;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+
+            .interactive-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>Decode<span style="color:#6c9eff;">Labs</span></h1>
+                <span>Batch 2026 · Frontend Development | Project 3</span>
+            </div>
+            <div class="badge-header">
+                <i class="fas fa-bolt"></i> Interactive Web Elements · Engagement Phase
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-flex">
+                <div class="hero-text">
+                    <div class="hero-badge" style="display: inline-block; background:#eef3ff; padding:0.2rem 1rem; border-radius: 30px; margin-bottom:1rem;">
+                        <i class="fas fa-mouse-pointer"></i> Master DOM manipulation
+                    </div>
+                    <h2>Bring interfaces to life<br> with <span style="color:#1f4f8f;">JavaScript interactivity.</span></h2>
+                    <p>Project 3: Buttons, toggles, dynamic updates, real-time user actions. Prove you can transform static pages into engaging experiences.</p>
+                </div>
+                <div class="hero-icon">
+                    <i class="fas fa-code-branch"></i>
+                    <p style="margin-top: 10px; font-weight:500;">JS · DOM · Events</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container playground">
+            <h2 class="section-title">⚡ Interactive Dashboard</h2>
+            <p class="section-sub">Click, toggle, add — everything responds instantly. Built with vanilla JavaScript, no external dependencies.</p>
+
+            <div class="interactive-grid">
+                <!-- CARD 1: Counter + dynamic message -->
+                <div class="card">
+                    <h3><i class="fas fa-plus-circle"></i> Live Counter</h3>
+                    <p>Increase, decrease or reset the counter — dynamic value updates in real time.</p>
+                    <div class="dynamic-box">
+                        <div class="counter-area" id="counterValue">0</div>
+                        <div class="btn-group">
+                            <button class="btn-primary" id="incBtn"><i class="fas fa-arrow-up"></i> Increment</button>
+                            <button class="btn-outline" id="decBtn"><i class="fas fa-arrow-down"></i> Decrement</button>
+                            <button class="btn-outline" id="resetBtn"><i class="fas fa-undo-alt"></i> Reset</button>
+                        </div>
+                        <div class="message-area" id="counterMessage">
+                            💡 Click the buttons to change the value
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Theme / Style Toggle (custom toggle switch + color change) -->
+                <div class="card">
+                    <h3><i class="fas fa-toggle-on"></i> UI Toggle & Mood</h3>
+                    <p>Toggle Dark / Light preview & dynamic background effect on this card.</p>
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="themeToggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label" id="toggleStatusLabel">🌞 Light mode (card style)</span>
+                    </div>
+                    <div id="colorPreviewBox" class="color-preview" style="background:#6c9eff;"></div>
+                    <div class="dynamic-box" id="moodMessage">
+                        ✨ Card style: default clean
+                    </div>
+                    <button id="randomColorBtn" class="btn-outline" style="margin-top: 12px; width:100%;"><i class="fas fa-palette"></i> Random Accent Color</button>
+                </div>
+
+                <!-- CARD 3: To-Do List (dynamic content update) -->
+                <div class="card">
+                    <h3><i class="fas fa-tasks"></i> Task Manager</h3>
+                    <p>Add tasks, toggle completion, delete — dynamic list modification.</p>
+                    <ul class="todo-list" id="todoList">
+                        <li><span class="done">🌟 Review DOM concepts</span><button class="delete-task"><i class="fas fa-trash-alt"></i></button></li>
+                        <li><span>📘 Build interactive elements</span><button class="delete-task"><i class="fas fa-trash-alt"></i></button></li>
+                        <li><span>🏆 Submit Project 3</span><button class="delete-task"><i class="fas fa-trash-alt"></i></button></li>
+                    </ul>
+                    <div class="add-todo">
+                        <input type="text" id="newTaskInput" placeholder="e.g., Master DOM manipulation">
+                        <button id="addTaskBtn">➕ Add</button>
+                    </div>
+                    <div id="taskFeedback" style="font-size:0.75rem; margin-top: 0.5rem; color:#3a5e7a;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- additional interactive zone: Dynamic content update + buttons -->
+        <div class="container" style="margin-bottom: 2rem;">
+            <div style="background: linear-gradient(120deg, #ffffff, #eef3fe); border-radius: 40px; padding: 2rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3><i class="fas fa-rocket"></i> Real-time quote machine</h3>
+                        <p id="dynamicQuote">Click the button to receive fresh developer motivation ✨</p>
+                        <button id="newQuoteBtn" class="btn-primary" style="margin-top: 10px;"><i class="fas fa-sync-alt"></i> New Quote</button>
+                    </div>
+                    <div>
+                        <button id="clearAllTasksBtn" class="btn-outline" style="border-color:#aa2e2e; color:#aa2e2e;"><i class="fas fa-trash"></i> Clear all tasks</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p><i class="fas fa-code"></i> DecodeLabs · Project 3 : Interactive Web Elements · JavaScript DOM Mastery</p>
+            <p style="margin-top: 8px;">⚡ Buttons · Toggles · Dynamic updates · Real-time user interaction ⚡</p>
+        </div>
+    </footer>
+
+    <script>
+  // --------------------------------------------------------------
+  // 1) COUNTER LOGIC with dynamic message update (DOM manipulation)
+  // --------------------------------------------------------------
+  let counter = 0;
+  const counterSpan = document.getElementById('counterValue');
+  const incBtn = document.getElementById('incBtn');
+  const decBtn = document.getElementById('decBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const counterMessage = document.getElementById('counterMessage');
+
+  function updateCounterDisplay() {
+    counterSpan.textContent = counter;
+    // dynamic message based on counter value
+    if (counter === 0) {
+      counterMessage.innerHTML = '🔄 Counter is neutral. Click + or -';
+      counterMessage.style.background = '#eaf3ff';
+    } else if (counter > 0) {
+      counterMessage.innerHTML = `👍 Positive energy! Current value: ${counter}`;
+      counterMessage.style.background = '#e0f0e8';
+    } else {
+      counterMessage.innerHTML = `⚠️ Negative value: ${counter}. You can reset anytime.`;
+      counterMessage.style.background = '#ffe6e5';
+    }
+  }
+
+  incBtn.addEventListener('click', () => {
+    counter++;
+    updateCounterDisplay();
+  });
+  decBtn.addEventListener('click', () => {
+    counter--;
+    updateCounterDisplay();
+  });
+  resetBtn.addEventListener('click', () => {
+    counter = 0;
+    updateCounterDisplay();
+  });
+
+  // -----------------------------------------------
+  // 2) THEME TOGGLE + DYNAMIC BACKGROUND PREVIEW
+  // -----------------------------------------------
+  const themeToggleCheckbox = document.getElementById('themeToggle');
+  const toggleStatusLabel = document.getElementById('toggleStatusLabel');
+  const moodMsgDiv = document.getElementById('moodMessage');
+  const colorPreviewBox = document.getElementById('colorPreviewBox');
+
+  function applyCardStyle(isDark) {
+    const cardElement = document.getElementById('themeToggle').closest('.card');
+    if (isDark) {
+      cardElement.style.background = '#1e293b';
+      cardElement.style.color = '#eef2ff';
+      cardElement.style.border = '1px solid #3b4e6b';
+      moodMsgDiv.innerHTML = '🌙 Dark mode activated · Card style inverted';
+      moodMsgDiv.style.background = '#2d3a4e';
+      moodMsgDiv.style.color = 'white';
+      toggleStatusLabel.innerHTML = '🌙 Dark mode active';
+    } else {
+      cardElement.style.background = 'white';
+      cardElement.style.color = '#1A2C3E';
+      cardElement.style.border = '1px solid #eef2ff';
+      moodMsgDiv.innerHTML = '☀️ Light mode · Fresh and clean';
+      moodMsgDiv.style.background = '#f0f5fe';
+      moodMsgDiv.style.color = '#0a1a2f';
+      toggleStatusLabel.innerHTML = '🌞 Light mode (card style)';
+    }
+  }
+
+  themeToggleCheckbox.addEventListener('change', (e) => {
+    applyCardStyle(e.target.checked);
+  });
+
+  // random color button => changes accent preview box
+  const randomColorBtn = document.getElementById('randomColorBtn');
+  randomColorBtn.addEventListener('click', () => {
+    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+    colorPreviewBox.style.backgroundColor = randomColor;
+    // also update a temp message in moodMsg to show dynamic change
+    moodMsgDiv.innerHTML = `🎨 Preview color updated: ${randomColor} (toggle still works)`;
+    setTimeout(() => {
+      if (themeToggleCheckbox.checked) {
+        moodMsgDiv.innerHTML = '🌙 Dark mode activated · Card style inverted';
+      } else {
+        moodMsgDiv.innerHTML = '☀️ Light mode · Fresh and clean';
+      }
+    }, 1500);
+  });
+
+  // -----------------------------------------------
+  // 3) TO-DO LIST: dynamic CRUD with completion toggle
+  // -----------------------------------------------
+  const todoContainer = document.getElementById('todoList');
+  const newTaskInput = document.getElementById('newTaskInput');
+  const addTaskBtn = document.getElementById('addTaskBtn');
+  const taskFeedback = document.getElementById('taskFeedback');
+
+  // Helper: create task item (li) with dynamic span & delete button
+  function createTaskItem(taskText, isCompleted = false) {
+    const li = document.createElement('li');
+    const taskSpan = document.createElement('span');
+    taskSpan.textContent = taskText;
+    if (isCompleted) {
+      taskSpan.classList.add('done');
+    }
+    // click on span toggles completion dynamically (interactive)
+    taskSpan.addEventListener('click', (e) => {
+      e.stopPropagation();
+      taskSpan.classList.toggle('done');
+      taskFeedback.textContent = `✔️ Task "${taskSpan.textContent}" status updated`;
+      setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 1200);
+    });
+
+    const delBtn = document.createElement('button');
+    delBtn.classList.add('delete-task');
+    delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    delBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      li.remove();
+      taskFeedback.textContent = `🗑️ Removed: "${taskText}"`;
+      setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 1000);
+    });
+    li.appendChild(taskSpan);
+    li.appendChild(delBtn);
+    return li;
+  }
+
+  // Add task from input
+  function addNewTask() {
+    const taskName = newTaskInput.value.trim();
+    if (taskName === '') {
+      taskFeedback.textContent = '❌ Please enter a task name!';
+      setTimeout(() => { taskFeedback.textContent = ''; }, 1500);
+      return;
+    }
+    const newItem = createTaskItem(taskName, false);
+    todoContainer.appendChild(newItem);
+    newTaskInput.value = '';
+    taskFeedback.textContent = `✅ "${taskName}" added to your list.`;
+    setTimeout(() => { taskFeedback.textContent = ''; }, 1200);
+  }
+
+  addTaskBtn.addEventListener('click', addNewTask);
+  newTaskInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addNewTask();
+  });
+
+  // Clear all tasks button (extra dynamic)
+  const clearAllBtn = document.getElementById('clearAllTasksBtn');
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener('click', () => {
+      while (todoContainer.firstChild) {
+        todoContainer.removeChild(todoContainer.firstChild);
+      }
+      // add a demo placeholder message?
+      const placeholderLi = document.createElement('li');
+      placeholderLi.style.justifyContent = 'center';
+      placeholderLi.style.background = '#f1f5f9';
+      placeholderLi.innerHTML = '<span style="color:#6c757d;">✨ No tasks — add something new</span><button class="delete-task" style="visibility:hidden;"></button>';
+      todoContainer.appendChild(placeholderLi);
+      taskFeedback.textContent = '🧹 All tasks cleared. Start fresh!';
+      setTimeout(() => { taskFeedback.textContent = ''; }, 1500);
+      // remove placeholder after 3 sec if needed? but it's fine.
+    });
+  }
+
+  // Attach delete & toggle listeners to existing tasks (initial items)
+  function bindExistingTasks() {
+    const allListItems = document.querySelectorAll('#todoList li');
+    allListItems.forEach(li => {
+      const taskSpan = li.querySelector('span');
+      const delButton = li.querySelector('.delete-task');
+      if (taskSpan && !taskSpan.getAttribute('data-listener')) {
+        taskSpan.setAttribute('data-listener', 'true');
+        taskSpan.addEventListener('click', (e) => {
+          e.stopPropagation();
+          taskSpan.classList.toggle('done');
+          taskFeedback.textContent = `🔄 Task "${taskSpan.textContent}" toggled`;
+          setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 900);
+        });
+      }
+      if (delButton && !delButton.getAttribute('data-listener-del')) {
+        delButton.setAttribute('data-listener-del', 'true');
+        delButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          li.remove();
+          taskFeedback.textContent = `❌ Removed task`;
+          setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 1000);
+        });
+      }
+    });
+  }
+  bindExistingTasks();
+
+  // 4) QUOTE GENERATOR — dynamic content update (extra interactive)
+  const quoteElement = document.getElementById('dynamicQuote');
+  const newQuoteBtn = document.getElementById('newQuoteBtn');
+  const quotesArray = [
+    "💡 \"JavaScript is the language of interactivity.\" — DecodeLabs",
+    "🚀 \"The DOM is your playground. Manipulate it with confidence.\"",
+    "🎯 \"Great UIs respond to every click, toggle, and input.\"",
+    "⚡ \"Project 3: you're now a frontend interaction master.\"",
+    "📚 \"Buttons & events: the heart of dynamic web apps.\"",
+    "🏆 \"Every dynamic update proves your JS skills.\""
+  ];
+  function updateRandomQuote() {
+    const randomIndex = Math.floor(Math.random() * quotesArray.length);
+    quoteElement.innerHTML = `<i class="fas fa-quote-left"></i> ${quotesArray[randomIndex]}`;
+  }
+  newQuoteBtn.addEventListener('click', updateRandomQuote);
+  updateRandomQuote();  // initial quote
+
+  // small additional: ensure counter update runs initially
+  updateCounterDisplay();
+
+  // final detail: if themeToggle.card style start default (light)
+  const mainCard = themeToggleCheckbox.closest('.card');
+  if (mainCard) mainCard.style.background = 'white';
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DecodeLabs | Project 3 · Interactive Web Elements</title>
+    <!-- Google Fonts & simple reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f7fc;
+            color: #1A2C3E;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header */
+        .site-header {
+            background: #0A1A2F;
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: #7e9ef5;
+        }
+
+        .badge-header {
+            background: #1f4f8f30;
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Hero intro */
+        .hero {
+            background: linear-gradient(115deg, #e9f0fa 0%, #ffffff 100%);
+            padding: 3rem 0;
+            border-bottom: 1px solid #d4e2fc;
+        }
+
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1.2;
+        }
+
+            .hero-text h2 {
+                font-size: 2.6rem;
+                font-weight: 800;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+                color: #2c4e6e;
+                max-width: 90%;
+                margin-bottom: 1.5rem;
+            }
+
+        .hero-icon {
+            flex: 0.8;
+            background: #ffffffcc;
+            border-radius: 36px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.05);
+        }
+
+            .hero-icon i {
+                font-size: 5rem;
+                color: #1f4f8f;
+            }
+
+        /* interactive playground */
+        .playground {
+            padding: 3.5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #3a5e7a;
+            max-width: 650px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* cards container */
+        .interactive-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem;
+            flex: 1;
+            min-width: 260px;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+            border: 1px solid #eef2ff;
+        }
+
+            .card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+        /* buttons & toggles */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .btn-primary {
+            background: #1f4f8f;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .btn-primary:hover {
+                background: #0e3a6b;
+                transform: translateY(-2px);
+            }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #1f4f8f;
+            color: #1f4f8f;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            .btn-outline:hover {
+                background: #eef4ff;
+            }
+
+        /* toggle switch (custom) */
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 1.2rem 0 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 56px;
+            height: 28px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 34px;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 22px;
+                width: 22px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: 0.3s;
+                border-radius: 50%;
+            }
+
+        input:checked + .slider {
+            background-color: #1f4f8f;
+        }
+
+            input:checked + .slider:before {
+                transform: translateX(28px);
+            }
+
+        .toggle-label {
+            font-weight: 500;
+        }
+
+        /* dynamic content display */
+        .dynamic-box {
+            background: #f0f5fe;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin-top: 1.2rem;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .counter-area {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0a1a2f;
+        }
+
+        .message-area {
+            background: #e4edfa;
+            padding: 0.7rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 18px;
+            background: #6c9eff;
+            margin: 1rem 0;
+        }
+
+        /* to-do list (interactive) */
+        .todo-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+            .todo-list li {
+                background: #f8fafd;
+                margin: 0.6rem 0;
+                padding: 0.6rem 1rem;
+                border-radius: 60px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 1px solid #dce7f5;
+            }
+
+                .todo-list li span {
+                    cursor: pointer;
+                    font-weight: 500;
+                }
+
+                    .todo-list li span.done {
+                        text-decoration: line-through;
+                        color: #7890aa;
+                    }
+
+        .delete-task {
+            background: none;
+            border: none;
+            color: #b91c1c;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .add-todo {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+            .add-todo input {
+                flex: 1;
+                padding: 0.7rem 1rem;
+                border-radius: 60px;
+                border: 1px solid #cbdffc;
+                outline: none;
+                font-family: inherit;
+            }
+
+            .add-todo button {
+                background: #1f4f8f;
+                border: none;
+                padding: 0 1.2rem;
+                border-radius: 60px;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+        /* footer */
+        .main-footer {
+            background: #0A1A2F;
+            color: #cdddf5;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+
+            .interactive-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>Decode<span style="color:#6c9eff;">Labs</span></h1>
+                <span>Batch 2026 · Frontend Development | Project 3</span>
+            </div>
+            <div class="badge-header">
+                <i class="fas fa-bolt"></i> Interactive Web Elements · Engagement Phase
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-flex">
+                <div class="hero-text">
+                    <div class="hero-badge" style="display: inline-block; background:#eef3ff; padding:0.2rem 1rem; border-radius: 30px; margin-bottom:1rem;">
+                        <i class="fas fa-mouse-pointer"></i> Master DOM manipulation
+                    </div>
+                    <h2>Bring interfaces to life<br> with <span style="color:#1f4f8f;">JavaScript interactivity.</span></h2>
+                    <p>Project 3: Buttons, toggles, dynamic updates, real-time user actions. Prove you can transform static pages into engaging experiences.</p>
+                </div>
+                <div class="hero-icon">
+                    <i class="fas fa-code-branch"></i>
+                    <p style="margin-top: 10px; font-weight:500;">JS · DOM · Events</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container playground">
+            <h2 class="section-title">⚡ Interactive Dashboard</h2>
+            <p class="section-sub">Click, toggle, add — everything responds instantly. Built with vanilla JavaScript, no external dependencies.</p>
+
+            <div class="interactive-grid">
+                <!-- CARD 1: Counter + dynamic message -->
+                <div class="card">
+                    <h3><i class="fas fa-plus-circle"></i> Live Counter</h3>
+                    <p>Increase, decrease or reset the counter — dynamic value updates in real time.</p>
+                    <div class="dynamic-box">
+                        <div class="counter-area" id="counterValue">0</div>
+                        <div class="btn-group">
+                            <button class="btn-primary" id="incBtn"><i class="fas fa-arrow-up"></i> Increment</button>
+                            <button class="btn-outline" id="decBtn"><i class="fas fa-arrow-down"></i> Decrement</button>
+                            <button class="btn-outline" id="resetBtn"><i class="fas fa-undo-alt"></i> Reset</button>
+                        </div>
+                        <div class="message-area" id="counterMessage">
+                            💡 Click the buttons to change the value
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Theme / Style Toggle (custom toggle switch + color change) -->
+                <div class="card">
+                    <h3><i class="fas fa-toggle-on"></i> UI Toggle & Mood</h3>
+                    <p>Toggle Dark / Light preview & dynamic background effect on this card.</p>
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="themeToggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label" id="toggleStatusLabel">🌞 Light mode (card style)</span>
+                    </div>
+                    <div id="colorPreviewBox" class="color-preview" style="background:#6c9eff;"></div>
+                    <div class="dynamic-box" id="moodMessage">
+                        ✨ Card style: default clean
+                    </div>
+                    <button id="randomColorBtn" class="btn-outline" style="margin-top: 12px; width:100%;"><i class="fas fa-palette"></i> Random Accent Color</button>
+                </div>
+
+                <!-- CARD 3: To-Do List (dynamic content update) -->
+                <div class="card">
+                    <h3><i class="fas fa-tasks"></i> Task Manager</h3>
+                    <p>Add tasks, toggle completion, delete — dynamic list modification.</p>
+                    <ul class="todo-list" id="todoList">
+                        <li><span class="done">🌟 Review DOM concepts</span><button class="delete-task"><i class="fas fa-trash-alt"></i></button></li>
+                        <li><span>📘 Build interactive elements</span><button class="delete-task"><i class="fas fa-trash-alt"></i></button></li>
+                        <li><span>🏆 Submit Project 3</span><button class="delete-task"><i class="fas fa-trash-alt"></i></button></li>
+                    </ul>
+                    <div class="add-todo">
+                        <input type="text" id="newTaskInput" placeholder="e.g., Master DOM manipulation">
+                        <button id="addTaskBtn">➕ Add</button>
+                    </div>
+                    <div id="taskFeedback" style="font-size:0.75rem; margin-top: 0.5rem; color:#3a5e7a;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- additional interactive zone: Dynamic content update + buttons -->
+        <div class="container" style="margin-bottom: 2rem;">
+            <div style="background: linear-gradient(120deg, #ffffff, #eef3fe); border-radius: 40px; padding: 2rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3><i class="fas fa-rocket"></i> Real-time quote machine</h3>
+                        <p id="dynamicQuote">Click the button to receive fresh developer motivation ✨</p>
+                        <button id="newQuoteBtn" class="btn-primary" style="margin-top: 10px;"><i class="fas fa-sync-alt"></i> New Quote</button>
+                    </div>
+                    <div>
+                        <button id="clearAllTasksBtn" class="btn-outline" style="border-color:#aa2e2e; color:#aa2e2e;"><i class="fas fa-trash"></i> Clear all tasks</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p><i class="fas fa-code"></i> DecodeLabs · Project 3 : Interactive Web Elements · JavaScript DOM Mastery</p>
+            <p style="margin-top: 8px;">⚡ Buttons · Toggles · Dynamic updates · Real-time user interaction ⚡</p>
+        </div>
+    </footer>
+
+    <script>
+  // --------------------------------------------------------------
+  // 1) COUNTER LOGIC with dynamic message update (DOM manipulation)
+  // --------------------------------------------------------------
+  let counter = 0;
+  const counterSpan = document.getElementById('counterValue');
+  const incBtn = document.getElementById('incBtn');
+  const decBtn = document.getElementById('decBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const counterMessage = document.getElementById('counterMessage');
+
+  function updateCounterDisplay() {
+    counterSpan.textContent = counter;
+    // dynamic message based on counter value
+    if (counter === 0) {
+      counterMessage.innerHTML = '🔄 Counter is neutral. Click + or -';
+      counterMessage.style.background = '#eaf3ff';
+    } else if (counter > 0) {
+      counterMessage.innerHTML = `👍 Positive energy! Current value: ${counter}`;
+      counterMessage.style.background = '#e0f0e8';
+    } else {
+      counterMessage.innerHTML = `⚠️ Negative value: ${counter}. You can reset anytime.`;
+      counterMessage.style.background = '#ffe6e5';
+    }
+  }
+
+  incBtn.addEventListener('click', () => {
+    counter++;
+    updateCounterDisplay();
+  });
+  decBtn.addEventListener('click', () => {
+    counter--;
+    updateCounterDisplay();
+  });
+  resetBtn.addEventListener('click', () => {
+    counter = 0;
+    updateCounterDisplay();
+  });
+
+  // -----------------------------------------------
+  // 2) THEME TOGGLE + DYNAMIC BACKGROUND PREVIEW
+  // -----------------------------------------------
+  const themeToggleCheckbox = document.getElementById('themeToggle');
+  const toggleStatusLabel = document.getElementById('toggleStatusLabel');
+  const moodMsgDiv = document.getElementById('moodMessage');
+  const colorPreviewBox = document.getElementById('colorPreviewBox');
+
+  function applyCardStyle(isDark) {
+    const cardElement = document.getElementById('themeToggle').closest('.card');
+    if (isDark) {
+      cardElement.style.background = '#1e293b';
+      cardElement.style.color = '#eef2ff';
+      cardElement.style.border = '1px solid #3b4e6b';
+      moodMsgDiv.innerHTML = '🌙 Dark mode activated · Card style inverted';
+      moodMsgDiv.style.background = '#2d3a4e';
+      moodMsgDiv.style.color = 'white';
+      toggleStatusLabel.innerHTML = '🌙 Dark mode active';
+    } else {
+      cardElement.style.background = 'white';
+      cardElement.style.color = '#1A2C3E';
+      cardElement.style.border = '1px solid #eef2ff';
+      moodMsgDiv.innerHTML = '☀️ Light mode · Fresh and clean';
+      moodMsgDiv.style.background = '#f0f5fe';
+      moodMsgDiv.style.color = '#0a1a2f';
+      toggleStatusLabel.innerHTML = '🌞 Light mode (card style)';
+    }
+  }
+
+  themeToggleCheckbox.addEventListener('change', (e) => {
+    applyCardStyle(e.target.checked);
+  });
+
+  // random color button => changes accent preview box
+  const randomColorBtn = document.getElementById('randomColorBtn');
+  randomColorBtn.addEventListener('click', () => {
+    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+    colorPreviewBox.style.backgroundColor = randomColor;
+    // also update a temp message in moodMsg to show dynamic change
+    moodMsgDiv.innerHTML = `🎨 Preview color updated: ${randomColor} (toggle still works)`;
+    setTimeout(() => {
+      if (themeToggleCheckbox.checked) {
+        moodMsgDiv.innerHTML = '🌙 Dark mode activated · Card style inverted';
+      } else {
+        moodMsgDiv.innerHTML = '☀️ Light mode · Fresh and clean';
+      }
+    }, 1500);
+  });
+
+  // -----------------------------------------------
+  // 3) TO-DO LIST: dynamic CRUD with completion toggle
+  // -----------------------------------------------
+  const todoContainer = document.getElementById('todoList');
+  const newTaskInput = document.getElementById('newTaskInput');
+  const addTaskBtn = document.getElementById('addTaskBtn');
+  const taskFeedback = document.getElementById('taskFeedback');
+
+  // Helper: create task item (li) with dynamic span & delete button
+  function createTaskItem(taskText, isCompleted = false) {
+    const li = document.createElement('li');
+    const taskSpan = document.createElement('span');
+    taskSpan.textContent = taskText;
+    if (isCompleted) {
+      taskSpan.classList.add('done');
+    }
+    // click on span toggles completion dynamically (interactive)
+    taskSpan.addEventListener('click', (e) => {
+      e.stopPropagation();
+      taskSpan.classList.toggle('done');
+      taskFeedback.textContent = `✔️ Task "${taskSpan.textContent}" status updated`;
+      setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 1200);
+    });
+
+    const delBtn = document.createElement('button');
+    delBtn.classList.add('delete-task');
+    delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    delBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      li.remove();
+      taskFeedback.textContent = `🗑️ Removed: "${taskText}"`;
+      setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 1000);
+    });
+    li.appendChild(taskSpan);
+    li.appendChild(delBtn);
+    return li;
+  }
+
+  // Add task from input
+  function addNewTask() {
+    const taskName = newTaskInput.value.trim();
+    if (taskName === '') {
+      taskFeedback.textContent = '❌ Please enter a task name!';
+      setTimeout(() => { taskFeedback.textContent = ''; }, 1500);
+      return;
+    }
+    const newItem = createTaskItem(taskName, false);
+    todoContainer.appendChild(newItem);
+    newTaskInput.value = '';
+    taskFeedback.textContent = `✅ "${taskName}" added to your list.`;
+    setTimeout(() => { taskFeedback.textContent = ''; }, 1200);
+  }
+
+  addTaskBtn.addEventListener('click', addNewTask);
+  newTaskInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addNewTask();
+  });
+
+  // Clear all tasks button (extra dynamic)
+  const clearAllBtn = document.getElementById('clearAllTasksBtn');
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener('click', () => {
+      while (todoContainer.firstChild) {
+        todoContainer.removeChild(todoContainer.firstChild);
+      }
+      // add a demo placeholder message?
+      const placeholderLi = document.createElement('li');
+      placeholderLi.style.justifyContent = 'center';
+      placeholderLi.style.background = '#f1f5f9';
+      placeholderLi.innerHTML = '<span style="color:#6c757d;">✨ No tasks — add something new</span><button class="delete-task" style="visibility:hidden;"></button>';
+      todoContainer.appendChild(placeholderLi);
+      taskFeedback.textContent = '🧹 All tasks cleared. Start fresh!';
+      setTimeout(() => { taskFeedback.textContent = ''; }, 1500);
+      // remove placeholder after 3 sec if needed? but it's fine.
+    });
+  }
+
+  // Attach delete & toggle listeners to existing tasks (initial items)
+  function bindExistingTasks() {
+    const allListItems = document.querySelectorAll('#todoList li');
+    allListItems.forEach(li => {
+      const taskSpan = li.querySelector('span');
+      const delButton = li.querySelector('.delete-task');
+      if (taskSpan && !taskSpan.getAttribute('data-listener')) {
+        taskSpan.setAttribute('data-listener', 'true');
+        taskSpan.addEventListener('click', (e) => {
+          e.stopPropagation();
+          taskSpan.classList.toggle('done');
+          taskFeedback.textContent = `🔄 Task "${taskSpan.textContent}" toggled`;
+          setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 900);
+        });
+      }
+      if (delButton && !delButton.getAttribute('data-listener-del')) {
+        delButton.setAttribute('data-listener-del', 'true');
+        delButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          li.remove();
+          taskFeedback.textContent = `❌ Removed task`;
+          setTimeout(() => { if(taskFeedback) taskFeedback.textContent = ''; }, 1000);
+        });
+      }
+    });
+  }
+  bindExistingTasks();
+
+  // 4) QUOTE GENERATOR — dynamic content update (extra interactive)
+  const quoteElement = document.getElementById('dynamicQuote');
+  const newQuoteBtn = document.getElementById('newQuoteBtn');
+  const quotesArray = [
+    "💡 \"JavaScript is the language of interactivity.\" — DecodeLabs",
+    "🚀 \"The DOM is your playground. Manipulate it with confidence.\"",
+    "🎯 \"Great UIs respond to every click, toggle, and input.\"",
+    "⚡ \"Project 3: you're now a frontend interaction master.\"",
+    "📚 \"Buttons & events: the heart of dynamic web apps.\"",
+    "🏆 \"Every dynamic update proves your JS skills.\""
+  ];
+  function updateRandomQuote() {
+    const randomIndex = Math.floor(Math.random() * quotesArray.length);
+    quoteElement.innerHTML = `<i class="fas fa-quote-left"></i> ${quotesArray[randomIndex]}`;
+  }
+  newQuoteBtn.addEventListener('click', updateRandomQuote);
+  updateRandomQuote();  // initial quote
+
+  // small additional: ensure counter update runs initially
+  updateCounterDisplay();
+
+  // final detail: if themeToggle.card style start default (light)
+  const mainCard = themeToggleCheckbox.closest('.card');
+  if (mainCard) mainCard.style.background = 'white';
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Web Layout</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 15px 20px;
+}
+
+.logo {
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px;
+    background: #f4f4f4;
+}
+
+/* Cards */
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card {
+    background: #ddd;
+    padding: 40px;
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #333;
+    color: white;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+        margin: 10px 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #333;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+    <nav class="navbar">
+        <h2 class="logo">MySite</h2>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <h1>Responsive Web Design</h1>
+    <p>This website works on all screen sizes.</p>
+</section>
+
+<!-- Cards -->
+<section class="container">
+    <div class="card">Box 1</div>
+    <div class="card">Box 2</div>
+    <div class="card">Box 3</div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 Responsive Website</p>
+</footer>
+
+<script>
+function toggleMenu() {
+    let nav = document.getElementById("navLinks");
+    nav.classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
